@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vote for Hamdan!</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    padding: 15px 30px;
+    margin: 0 10px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+
+  .yes {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .no {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .yes:hover {
+    background-color: #218838;
+  }
+
+  .no:hover {
+    background-color: #c82333;
+  }
+
+  #thankYou {
+    display: none;
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<h1>Will you vote for Hamdan? 🗳️</h1>
+<p>“I’m not running for a title. I’m running for a transformation.”</p>
+
+<div>
+  <button id="yesBtn" class="btn yes">YES ✅</button>
+  <button id="noBtn" class="btn no">NO</button>
+</div>
+
+<div id="thankYou">
+  🎉 Thank you for voting Hamdan! 🎉<br>
+  Your support means the world 💙
+</div>
+
+<script>
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const thankYou = document.getElementById('thankYou');
+
+  let noCount = 0;
+
+  const noPhrases = [
+    "No",
+    "Are you sure?",
+    "Really sure?",
+    "Think again!",
+    "Last chance...",
+    "You might regret this!",
+    "Have a heart bro 💔",
+    "Don't be so cold!",
+    "Change of heart??? 💖",
+    "You're breaking my heart 😢"
+  ];
+
+  yesBtn.addEventListener('click', () => {
+    thankYou.style.display = 'block';
+    yesBtn.style.display = 'none';
+    noBtn.style.display = 'none';
+  });
+
+  function updateNoButton() {
+    noCount++;
+    noBtn.textContent = noPhrases[Math.min(noCount, noPhrases.length - 1)];
+
+    // Move NO button randomly
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+
+    // Increase YES font size
+    const currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+    yesBtn.style.fontSize = (currentSize + 2) + 'px';
+  }
+
+  noBtn.addEventListener('mouseenter', updateNoButton);
+  noBtn.addEventListener('click', updateNoButton);
+</script>
+
+</body>
+</html>
